@@ -9,6 +9,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
+/**
+ * 公共响应报文
+ * @author cent
+ * @version 1.0 2019年6月22日
+ */
 public class CommonResponse implements Serializable {
 
     public static final String SUCCESS = "success";

@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.server.MethodNotAllowedException;
 
+/**
+ * 全局统一异常处理
+ * @author cent
+ * @version 1.0 2019年6月22日
+ */
 @ControllerAdvice
 @ResponseBody
 public class ExceptionHandlerAdvice {

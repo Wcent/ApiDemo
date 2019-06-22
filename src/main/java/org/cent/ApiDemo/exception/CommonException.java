@@ -1,6 +1,7 @@
 package org.cent.ApiDemo.exception;
 
 /**
+ * 公共异常
  * @author Vincent
  * @version 1.0 2019/6/22
  */

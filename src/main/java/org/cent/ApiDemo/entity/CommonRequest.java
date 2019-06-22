@@ -5,6 +5,11 @@ import com.alibaba.fastjson.JSON;
 import java.io.Serializable;
 import java.util.Map;
 
+/**
+ * 公共请求报文
+ * @author cent
+ * @version 1.0 2019年6月22日
+ */
 public class CommonRequest implements Serializable {
 
     private String version;
