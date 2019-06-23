@@ -26,8 +26,10 @@ public class RequestListener implements ServletRequestListener {
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
         HttpServletRequest request = (HttpServletRequest)sre.getServletRequest();
-        LOGGER.info("监听到新增请求：" + request.getRequestURI());
-        if (request.getRequestURI() != null && request.getRequestURI().startsWith("/test")) {
+        String uri = request.getRequestURI();
+        request.setAttribute("RequestUri", uri);
+        LOGGER.info("监听到新增请求：" + uri);
+        if (uri != null && uri.startsWith("/test")) {
             LOGGER.info("测试请求：" + request.getRequestURI());
         }
     }

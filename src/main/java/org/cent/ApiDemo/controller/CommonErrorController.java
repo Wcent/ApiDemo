@@ -1,5 +1,7 @@
 package org.cent.ApiDemo.controller;
 
+import org.apache.catalina.connector.RequestFacade;
+import org.apache.catalina.connector.ResponseFacade;
 import org.cent.ApiDemo.entity.CommonResponse;
 import org.cent.ApiDemo.exception.CommonException;
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 全局统一404异常处理
@@ -28,11 +31,20 @@ public class CommonErrorController implements ErrorController {
 
     @RequestMapping(value = "/error")
     @ResponseBody
-    public CommonResponse error() {
+    public CommonResponse error(HttpServletRequest request, HttpServletResponse response) {
         CommonResponse commonResponse = new CommonResponse();
-        commonResponse.setStatus(CommonResponse.ERROR);
-        commonResponse.setCode("404");
-        commonResponse.setMessage("404 - 请求路径不存在");
+        String status = String.valueOf(response.getStatus());
+        if ("404".equals(status)) {
+            // 获取监听器设置的原始请求uri
+            String uri = (String) request.getAttribute("RequestUri");
+            commonResponse.setStatus(CommonResponse.ERROR);
+            commonResponse.setCode(status);
+            commonResponse.setMessage(String.format("404 - 请求路径%s不存在", uri));
+        } else {
+            commonResponse.setStatus(CommonResponse.UNKNOWN);
+            commonResponse.setCode(status);
+            commonResponse.setMessage(String.format("%s - 未知异常", status));
+        }
         return commonResponse;
     }
 
@@ -59,6 +71,10 @@ public class CommonErrorController implements ErrorController {
         return commonResponse;
     }
 
+    /**
+     * 测试本uri被拦截器拦截处理
+     * @return
+     */
     @RequestMapping(value = "/error/interceptor")
     @ResponseBody
     public CommonResponse interceptor() {
