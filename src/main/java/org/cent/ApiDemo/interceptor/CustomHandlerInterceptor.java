@@ -1,5 +1,6 @@
 package org.cent.ApiDemo.interceptor;
 
+import org.cent.ApiDemo.constant.ExceptionEnum;
 import org.cent.ApiDemo.exception.CommonException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +21,10 @@ public class CustomHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        LOGGER.info("拦截器请求前检查处理：" + request.getRequestURI());
+        LOGGER.info("#######################拦截器请求前检查处理#######################");
+        LOGGER.info("请求URI：" + request.getRequestURI());
         if ("/error/interceptor".equals(request.getRequestURI())) {
-            LOGGER.info("拦截请求：" + request.getRequestURI());
-            throw new CommonException("ERR0004", "拦截无效请求");
+            throw new CommonException(ExceptionEnum.OTH0003.toString());
             // 返回false则中断请求
 //            return false;
         }
@@ -32,11 +33,11 @@ public class CustomHandlerInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        LOGGER.info("拦截器请求后处理");
+        LOGGER.info("#######################拦截器请求后处理#######################");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        LOGGER.info("拦截器请求完成回调处理");
+        LOGGER.info("#######################拦截器请求完成回调处理#######################");
     }
 }

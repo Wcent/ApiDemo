@@ -21,7 +21,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        LOGGER.info("注册拦截器");
+        LOGGER.info("#######################注册拦截器#######################");
         registry.addInterceptor(handlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/api/**");
     }
 

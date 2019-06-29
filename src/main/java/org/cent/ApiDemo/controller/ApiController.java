@@ -1,15 +1,19 @@
 package org.cent.ApiDemo.controller;
 
-import com.alibaba.fastjson.JSON;
-import org.cent.ApiDemo.entity.CommonRequest;
-import org.cent.ApiDemo.entity.CommonResponse;
+import org.cent.ApiDemo.model.CommonRequest;
+import org.cent.ApiDemo.model.CommonResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api")
 public class ApiController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApiController.class);
 
     @GetMapping(value = "/json")
     public CommonResponse getJson() {
@@ -17,12 +21,18 @@ public class ApiController {
     }
 
     @PostMapping(value = "/json")
-    public CommonResponse postJson(@RequestBody CommonRequest commonRequest) {
+    public CommonResponse postJson(@RequestBody @Validated CommonRequest commonRequest, BindingResult bindingResult) throws BindException {
+
+        // 请求报文校验是否异常
+        if (bindingResult.hasErrors()) {
+            LOGGER.error("请求报文无效");
+            throw new BindException(bindingResult);
+        }
+
         CommonResponse commonResponse = new CommonResponse();
         commonResponse.setStatus(CommonResponse.SUCCESS);
-        commonResponse.setCode("SUC0000");
         commonResponse.setMessage("请求成功");
-        commonResponse.setBody(JSON.parseObject(JSON.toJSONString(commonRequest), Map.class));
+        commonResponse.putItem("request", commonRequest);
         return commonResponse;
     }
 }

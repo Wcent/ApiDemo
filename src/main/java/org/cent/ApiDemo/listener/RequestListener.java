@@ -20,7 +20,7 @@ public class RequestListener implements ServletRequestListener {
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre) {
-        LOGGER.info("监听到请求结束");
+        LOGGER.info("#######################监听到请求结束#######################");
     }
 
     @Override
@@ -28,9 +28,7 @@ public class RequestListener implements ServletRequestListener {
         HttpServletRequest request = (HttpServletRequest)sre.getServletRequest();
         String uri = request.getRequestURI();
         request.setAttribute("RequestUri", uri);
-        LOGGER.info("监听到新增请求：" + uri);
-        if (uri != null && uri.startsWith("/test")) {
-            LOGGER.info("测试请求：" + request.getRequestURI());
-        }
+        LOGGER.info("#######################监听到新增请求#######################");
+        LOGGER.info("请求URI：" + uri);
     }
 }

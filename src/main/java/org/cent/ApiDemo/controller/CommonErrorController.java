@@ -1,9 +1,8 @@
 package org.cent.ApiDemo.controller;
 
-import org.apache.catalina.connector.RequestFacade;
-import org.apache.catalina.connector.ResponseFacade;
-import org.cent.ApiDemo.entity.CommonResponse;
+import org.cent.ApiDemo.constant.ExceptionEnum;
 import org.cent.ApiDemo.exception.CommonException;
+import org.cent.ApiDemo.model.CommonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -33,17 +32,17 @@ public class CommonErrorController implements ErrorController {
     @ResponseBody
     public CommonResponse error(HttpServletRequest request, HttpServletResponse response) {
         CommonResponse commonResponse = new CommonResponse();
-        String status = String.valueOf(response.getStatus());
-        if ("404".equals(status)) {
+        int status = response.getStatus();
+        if (status == 404) {
             // 获取监听器设置的原始请求uri
             String uri = (String) request.getAttribute("RequestUri");
+            LOGGER.error("请求路径不存在：" + uri);
             commonResponse.setStatus(CommonResponse.ERROR);
-            commonResponse.setCode(status);
-            commonResponse.setMessage(String.format("404 - 请求路径%s不存在", uri));
+            commonResponse.setMessage(String.format(ExceptionEnum.REQ0008.toString(), uri));
         } else {
+            LOGGER.error("未知异常，响应码：" + status);
             commonResponse.setStatus(CommonResponse.UNKNOWN);
-            commonResponse.setCode(status);
-            commonResponse.setMessage(String.format("%s - 未知异常", status));
+            commonResponse.setMessage(String.format(ExceptionEnum.UNK0001.toString(), status));
         }
         return commonResponse;
     }
@@ -61,12 +60,10 @@ public class CommonErrorController implements ErrorController {
         CommonResponse commonResponse = new CommonResponse();
         if (commonException != null) {
             commonResponse.setStatus((CommonResponse.ERROR));
-            commonResponse.setCode(commonException.getCode());
             commonResponse.setMessage(commonException.getMessage());
         } else {
             commonResponse.setStatus((CommonResponse.UNKNOWN));
-            commonResponse.setCode("ERR0003");
-            commonResponse.setMessage("未知异常");
+            commonResponse.setMessage(ExceptionEnum.UNK0002.toString());
         }
         return commonResponse;
     }

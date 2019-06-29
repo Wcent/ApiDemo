@@ -1,12 +1,12 @@
-package org.cent.ApiDemo.entity;
+package org.cent.ApiDemo.model;
 
 import com.alibaba.fastjson.JSON;
 
 import java.io.Serializable;
-import java.security.Timestamp;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,7 +25,6 @@ public class CommonResponse implements Serializable {
     private String signType;
     private String sign;
     private String status;
-    private String code;
     private String message;
     private String timestamp;
     private Map<String, Object> body;
@@ -34,7 +33,14 @@ public class CommonResponse implements Serializable {
         version = "1.0";
         encoding = "utf-8";
         status = UNKNOWN;
-        timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")).toString();
+        timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
+    public <T> void putItem(String name, T item) {
+        if (body == null) {
+            body = new HashMap<>();
+        }
+        body.put(name, item);
     }
 
     @Override
@@ -80,14 +86,6 @@ public class CommonResponse implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getMessage() {

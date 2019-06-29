@@ -1,5 +1,7 @@
 package org.cent.ApiDemo.exception;
 
+import org.cent.ApiDemo.constant.ExceptionEnum;
+
 /**
  * 公共异常
  * @author Vincent
@@ -7,23 +9,26 @@ package org.cent.ApiDemo.exception;
  */
 public class CommonException extends RuntimeException {
 
-    private String code;
-
-    public CommonException(String code, String message) {
-        super(String.format("%s - %s", code, message));
-        this.code = code;
+    /**
+     * 默认其他异常
+     */
+    public CommonException() {
+        super(ExceptionEnum.OTH0000.toString());
     }
 
-    public CommonException(String code, String message, Throwable throwable) {
-        super(String.format("%s - %s, %s", code, message, throwable.getMessage()));
-        this.code =  code;
+    public CommonException(String message) {
+        super(message);
     }
 
-    public String getCode() {
-        return code;
+    public CommonException(String message, Throwable cause) {
+        super(message, cause);
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public CommonException(Throwable cause) {
+        super(cause);
+    }
+
+    protected CommonException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }
