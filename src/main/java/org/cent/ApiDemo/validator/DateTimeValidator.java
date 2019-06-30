@@ -14,13 +14,17 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTimeValidator implements ConstraintValidator<DateTime, String> {
 
+    // 是否必须有值
     private boolean required = true;
+    // 检查类型，datetime/date/time
     private DateTime.CheckType type = DateTime.CheckType.datetime;
+    // 日期时间校验格式
     private String pattern = "yyyy-MM-dd HH:mm:ss";
     private DateTimeFormatter formatter;
 
     @Override
     public void initialize(DateTime constraintAnnotation) {
+        // 获取注解设置各条件限制
         required = constraintAnnotation.required();
         type = constraintAnnotation.type();
         pattern = constraintAnnotation.pattern();
