@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "encoding": "utf-8",
+  "signType": "RSA2",
+  "sign": "sign",
+  "requestFrom": "postman",
+  "timestamp": "2019-06-30 16:04:51",
+  "body": {
+    "testVo": {
+      "anInt": 1,
+      "aLong": 100,
+      "string": "hello",
+      "bigDecimal": 1.12,
+      "datetime": "20190630173600",
+      "date": "2019-06-31",
+      "time": "17:54:09"
+    },
+    "testVos": [
+      {"anInt": 3,
+        "string": "test",
+        "bigDecimal": 1,
+        "datetime": "20190630173600",
+        "date": "2019-06-31",
+        "time": "17:54:08"
+      },
+      {
+        "anInt": 1,
+        "aLong": 9,
+        "string": "hello",
+        "bigDecimal": 2.34,
+        "datetime": "20190630173600",
+        "date": "2019-06-31",
+        "time": "17:54:09"
+      },
+      {
+        "anInt": 2,
+        "aLong": 10,
+        "string": "world",
+        "bigDecimal": 1.12,
+        "datetime": "20190630173600",
+        "date": "2019-06-31",
+        "time": "17:54:10"
+      }]
+  }
+}

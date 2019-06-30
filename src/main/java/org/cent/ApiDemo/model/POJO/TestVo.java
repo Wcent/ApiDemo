@@ -1,5 +1,6 @@
 package org.cent.ApiDemo.model.POJO;
 
+import org.cent.ApiDemo.validator.DateTime;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
@@ -29,6 +30,15 @@ public class TestVo {
     @Digits(integer = 1, fraction = 2, message = "最多1位整数，2位小数")
     @DecimalMin(value = "0", inclusive = false, message = "必须大于0")
     private BigDecimal bigDecimal;
+
+    @DateTime(type = DateTime.CheckType.datetime, pattern = "yyyyMMddHHmmss", message = "日期时间格式yyyyMMddHHmmss")
+    private String datetime;
+
+    @DateTime(type = DateTime.CheckType.date, pattern = "yyyy-MM-dd", message = "日期不能为空，格式yyyy-MM-dd")
+    private String date;
+
+    @DateTime(type = DateTime.CheckType.time, pattern = "HH:mm:ss", message = "时间格式为HH:mm:ss")
+    private String time;
 
     public int getAnInt() {
         return anInt;
@@ -62,6 +72,30 @@ public class TestVo {
         this.bigDecimal = bigDecimal;
     }
 
+    public String getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(String datetime) {
+        this.datetime = datetime;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     @Override
     public String toString() {
         return "TestVo{" +
@@ -69,6 +103,9 @@ public class TestVo {
                 ", aLong=" + aLong +
                 ", string='" + string + '\'' +
                 ", bigDecimal=" + bigDecimal +
+                ", datetime='" + datetime + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
                 '}';
     }
 }

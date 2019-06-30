@@ -5,3 +5,4 @@ a sample api demo
 - CommonRequest and CommonResponse with json.
 - CommonException handler.
 - Listener, Filter and Interceptor handler.
+- Validator and self-defined validator.
