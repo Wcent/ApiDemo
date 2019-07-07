@@ -1,4 +1,4 @@
-package org.cent.ApiDemo.model.POJO;
+package org.cent.ApiDemo.model.pojo;
 
 import org.cent.ApiDemo.validator.DateTime;
 import org.hibernate.validator.constraints.Length;

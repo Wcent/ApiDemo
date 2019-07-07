@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +32,14 @@ public class CommonResponse implements Serializable {
         version = "1.0";
         encoding = "utf-8";
         status = UNKNOWN;
+        timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
+    public CommonResponse(String status, String message) {
+        version = "1.0";
+        encoding = "utf-8";
+        this.status = status;
+        this.message = message;
         timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 

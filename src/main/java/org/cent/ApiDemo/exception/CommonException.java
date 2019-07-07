@@ -20,6 +20,10 @@ public class CommonException extends RuntimeException {
         super(message);
     }
 
+    public CommonException(ExceptionEnum exceptionEnum, Object...args) {
+        super(String.format(exceptionEnum.toString(), args));
+    }
+
     public CommonException(String message, Throwable cause) {
         super(message, cause);
     }

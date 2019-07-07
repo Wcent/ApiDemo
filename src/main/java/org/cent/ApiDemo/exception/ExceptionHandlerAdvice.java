@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.List;
 
@@ -61,6 +62,12 @@ public class ExceptionHandlerAdvice {
         commonResponse.setStatus(CommonResponse.ERROR);
         commonResponse.setMessage(e.getMessage());
         return commonResponse;
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public CommonResponse handleNoHandlerFoundException(NoHandlerFoundException e) {
+        LOGGER.error("请求路径不存在404", e);
+        return new CommonResponse(CommonResponse.ERROR, String.format(ExceptionEnum.REQ0009.toString(), e.getMessage()));
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

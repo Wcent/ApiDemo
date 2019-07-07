@@ -1,0 +1,18 @@
+spring:
+  mvc:
+    # 配置抛出异常，方便自行统一处理，spring默认捕获异常并跳转/errors报错404
+    # 需要配合以下配置使用
+    throw-exception-if-no-handler-found: true
+  resources:
+    # 关闭默认配置工程中的资源文件建立映射，
+    # 否则spring默认加上ResourceHttpRequestHandler，导致以上404抛异常配置无效
+    add-mappings: false
+
+  jackson:
+    # 配置jackson反序列化json为bean时，浮点型转BigDecimal，数值可保留精度，使用在金额字段场景
+    deserialization:
+      USE_BIG_DECIMAL_FOR_FLOATS: true
+
+    # 配置jackson序列化bean为json时，BigDecimal数值可保留精度，使用在金额字段场景
+    serialization:
+      WRITE_BIGDECIMAL_AS_PLAIN: true

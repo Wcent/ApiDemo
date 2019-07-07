@@ -2,7 +2,7 @@ package org.cent.ApiDemo.controller;
 
 import org.cent.ApiDemo.model.CommonRequest;
 import org.cent.ApiDemo.model.CommonResponse;
-import org.cent.ApiDemo.model.POJO.TestVo;
+import org.cent.ApiDemo.model.pojo.TestVo;
 import org.cent.ApiDemo.util.BeanValidatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
