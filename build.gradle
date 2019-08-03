@@ -36,6 +36,7 @@ repositories {
 }
 
 dependencies {
+	compile 'org.dom4j:dom4j:2.1.1'
 	compile 'com.alibaba:fastjson:1.2.58'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<ddz>
+    <item id="test1">
+        <field id="test1filed1" />
+        <field id="test1filed2" />
+        <field id="test1filed3" />
+    </item>
+</ddz>
